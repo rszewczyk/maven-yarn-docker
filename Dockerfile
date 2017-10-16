@@ -3,7 +3,7 @@ FROM maven:3.5-jdk-8
 ADD https://s3.amazonaws.com/public-file-storage/public-maven-settings.xml /usr/share/maven/ref/settings.xml
 
 # install node + yarn
-# copied from https://github.com/nodejs/docker-node/blob/master/6.11/stretch/Dockerfile
+# copied from https://github.com/nodejs/docker-node/blob/master/8.7/Dockerfile
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
@@ -25,7 +25,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.11.3
+ENV NODE_VERSION 8.7.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
@@ -44,7 +44,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.0.1
+ENV YARN_VERSION 1.2.0
 
 RUN set -ex \
   && for key in \
